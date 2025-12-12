@@ -5,6 +5,8 @@ import {
     Layout as LayoutIcon, Zap, MousePointer2, TrendingUp, ShieldCheck,
     Star, Users, Clock
 } from 'lucide-react';
+import rukaLogo from '/public/ruka-logo.png';
+import villaLujo from '/public/villa-lujo.jpg';
 
 // --- STYLES & ANIMATIONS ---
 const GlobalStyles = () => (
@@ -294,7 +296,7 @@ const useScrollReveal = (trigger) => {
 
 const RukaLogo = ({ className = "h-10" }) => (
     <img
-        src="/ruka-logo.png"
+        src={rukaLogo}
         alt="Ruka Agency Logo"
         className={className}
     />
@@ -547,7 +549,7 @@ const BentoEcosystem = () => (
                 {/* Card 1: Main (Web) - Use Dark Petrol Blue BG with WHITE text */}
                 <div className="md:col-span-2 md:row-span-2 bg-[#4F7B8C] text-white rounded-[2rem] p-10 flex flex-col justify-between hover-lift group reveal relative overflow-hidden">
                     <img
-                        src="/villa-lujo.jpg"
+                        src={villaLujo}
                         alt="Villa de Lujo con Piscina Infinita"
                         className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay transition-transform duration-700 group-hover:scale-105"
                     />
