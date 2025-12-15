@@ -420,17 +420,19 @@ const Hero = ({ navigateTo }) => (
 
                 <h1 className="mb-8">
                     <div className="type-display text-[#4F7B8C] font-extrabold">
-                        ELEVA TU
+                        MARKETING DIGITAL
                     </div>
                     <div className="type-h1 text-[#6599CB] font-light mt-2 tracking-wide italic">
-                        estándar digital.
+                        para Inmobiliarias Boutique y de Lujo.
                     </div>
                 </h1>
                 <div className="grid md:grid-cols-2 gap-16 items-end mt-12">
                     <div>
+                        <p className="type-h3 text-[#4F7B8C] mb-4">
+                            Somos tu partner estratégico en marketing digital inmobiliario para captar mejores propiedades, atraer compradores de alto valor y escalar tu agencia con control y eficiencia.
+                        </p>
                         <p className="type-body text-lg text-[#2C3E50] max-w-lg leading-relaxed mb-8">
-                            Transformamos Agencias Inmobiliarias en líderes de mercado.
-                            Creamos ecosistemas digitales que atraen compradores de alto valor mientras tu equipo se enfoca en cerrar ventas.
+                            El sector inmobiliario ha cambiado. Hoy, el liderazgo no depende solo de tu cartera, sino de tu posicionamiento digital. Las agencias que dominan el marketing inmobiliario digital captan antes, filtran mejor y venden con menos fricción.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <Button onClick={() => navigateTo && navigateTo('contact')} variant="accent">Solicitar Auditoría</Button>
@@ -463,35 +465,35 @@ const DiagnosticSection = () => (
         <div className="container mx-auto max-w-7xl">
             <div className="grid md:grid-cols-2 gap-20 items-center">
                 <div className="reveal">
-                    <span className="type-label text-[#6599CB] mb-4 block">Diagnóstico de Marca</span>
+                    <span className="type-label text-[#6599CB] mb-4 block">El Problema</span>
                     <h2 className="type-h2 text-[#4F7B8C] mb-6">
-                        ¿Está tu Presencia Digital alineada con tu Portafolio?
+                        No es falta de demanda.<br />Es falta de un sistema digital sólido.
                     </h2>
                     <p className="text-[#2C3E50] mb-10 text-lg leading-relaxed">
-                        En el sector de lujo, la percepción es realidad. Identificamos áreas clave donde tu agencia puede elevar su posicionamiento y eficiencia:
+                        Muchas inmobiliarias invierten en acciones sueltas de marketing digital sin una estrategia integrada. El resultado: baja visibilidad, leads poco cualificados y equipos saturados.
                     </p>
 
                     <div className="space-y-6">
                         {[
                             {
-                                title: "Exclusividad Visual",
-                                desc: "¿Tu web transmite el mismo prestigio que las villas que vendes?",
-                                icon: <Star size={20} />
-                            },
-                            {
-                                title: "Autoridad en Buscadores",
-                                desc: "¿Apareces antes que tu competencia cuando buscan propiedades premium?",
+                                title: "Invisibilidad en buscadores",
+                                desc: "Tu competencia aparece antes cuando buscan propiedades en tu zona.",
                                 icon: <TrendingUp size={20} />
                             },
                             {
-                                title: "Cualificación Automática",
-                                desc: "¿Tu sistema filtra a los curiosos para entregarte solo compradores reales?",
+                                title: "Leads sin perfil adecuado",
+                                desc: "Contactos que no encajan con tu mercado ni con tu nivel de servicio.",
                                 icon: <Users size={20} />
                             },
                             {
-                                title: "Eficiencia Operativa",
-                                desc: "¿Tu equipo invierte tiempo en procesos que deberían ser automáticos?",
+                                title: "Procesos comerciales manuales",
+                                desc: "Tiempo perdido que frena el crecimiento de la agencia.",
                                 icon: <Clock size={20} />
+                            },
+                            {
+                                title: "Coste de oportunidad",
+                                desc: "Una sola operación perdida por una mala estrategia puede superar toda inversión anual.",
+                                icon: <ShieldCheck size={20} />
                             }
                         ].map((item, i) => (
                             <div key={i} className="flex gap-5 p-4 rounded-xl hover:bg-[#E1E1D7] transition-colors group cursor-default">
@@ -536,12 +538,12 @@ const BentoEcosystem = () => (
                 <div>
                     <span className="type-label text-[#6599CB] mb-4 block">La Solución</span>
                     <h2 className="type-h2 text-[#4F7B8C] max-w-2xl">
-                        Un Ecosistema Digital <br />
-                        <span className="text-[#6599CB]">Completamente Integrado</span>
+                        Un sistema completo de<br />
+                        <span className="text-[#6599CB]">marketing digital inmobiliario</span>
                     </h2>
                 </div>
-                <p className="text-[#2C3E50] mt-6 md:mt-0 max-w-xs text-right hidden md:block">
-                    No vendemos servicios aislados.<br />Creamos motores de crecimiento.
+                <p className="text-[#2C3E50] mt-6 md:mt-0 max-w-sm text-right hidden md:block">
+                    No somos un proveedor más. <br />Diseñamos ecosistemas donde cada pieza trabaja para captar, cualificar y convertir.
                 </p>
             </div>
 
@@ -559,52 +561,58 @@ const BentoEcosystem = () => (
                         <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-8 backdrop-blur-sm">
                             <LayoutIcon size={24} className="text-white" />
                         </div>
-                        <h3 className="type-h2 mb-4">Presencia Digital Premium</h3>
+                        <h3 className="type-h2 mb-4">Web inmobiliaria premium</h3>
                         <p className="text-white/90 max-w-md text-lg leading-relaxed">
-                            Desarrollo web que no solo muestra propiedades, sino que vende un estilo de vida. Velocidad extrema, diseño minimalista y optimización móvil.
+                            Imagen de marca alineada con el nivel de tus propiedades y clientes. Diseño elegante, optimizado para conversión y autoridad.
                         </p>
-                    </div>
-                    <div className="mt-8 flex flex-wrap gap-3 relative z-10">
-                        {['UX/UI Lujo', 'React.js', 'Velocidad', 'Conversión'].map(tag => (
-                            <span key={tag} className="px-4 py-1.5 border border-white/20 rounded-full text-xs uppercase tracking-wider bg-white/5">
-                                {tag}
-                            </span>
-                        ))}
                     </div>
                 </div>
 
-                {/* Card 2: SEO - White BG */}
-                <div className="md:col-span-2 bg-white rounded-[2rem] p-10 shadow-sm border border-transparent hover:border-[#6599CB]/30 transition-all hover-lift reveal delay-100 flex flex-col justify-between">
+                {/* Card 2: SEO - White BG - Modified to spans 1 col */}
+                <div className="md:col-span-1 bg-white rounded-[2rem] p-8 shadow-sm border border-transparent hover:border-[#6599CB]/30 transition-all hover-lift reveal delay-100 flex flex-col justify-between">
                     <div>
                         <div className="w-12 h-12 bg-[#6599CB]/10 rounded-xl flex items-center justify-center mb-6">
                             <Globe size={24} className="text-[#6599CB]" />
                         </div>
-                        <h3 className="type-h3 text-[#4F7B8C] mb-3">Visibilidad Estratégica (SEO)</h3>
+                        <h3 className="type-h3 text-[#4F7B8C] mb-3">SEO Estratégico</h3>
                         <p className="text-sm text-[#2C3E50] leading-relaxed">
-                            Posicionamiento dominante para keywords de alto valor ("Villas Costa Brava", "Áticos Santiago"). No buscamos tráfico masivo, buscamos tráfico cualificado.
+                            Posicionamiento sólido en marketing digital inmobiliario y búsquedas locales de alto valor.
                         </p>
                     </div>
                 </div>
 
-                {/* Card 3: Ads - Brighter Blue BG with WHITE text */}
+                {/* Card 3: Ads - Brighter Blue BG - Spans 1 col */}
                 <div className="md:col-span-1 bg-[#6599CB] text-white rounded-[2rem] p-8 hover-lift reveal delay-200 flex flex-col justify-between">
                     <Zap size={32} className="mb-4 text-[#F2994B]" />
                     <div>
-                        <h3 className="text-xl font-bold mb-2">Google Ads & PPC</h3>
+                        <h3 className="text-xl font-bold mb-2">Publicidad Segmentada</h3>
                         <p className="text-xs text-white/90 leading-relaxed">
-                            Segmentación por patrimonio. Llegamos al inversor, no al curioso. ROI medible.
+                            Campañas enfocadas en compradores reales, no en tráfico genérico.
                         </p>
                     </div>
                 </div>
 
-                {/* Card 4: CRM - Cream BG */}
+                {/* Card 4: CRM - Cream BG - Spans 1 col */}
                 <div className="md:col-span-1 bg-[#E1E1D7] border border-[#6599CB]/10 rounded-[2rem] p-8 hover-lift reveal delay-300 flex flex-col justify-between relative overflow-hidden">
                     <div className="absolute inset-0 bg-[#6599CB]/5"></div>
                     <MousePointer2 size={32} className="mb-4 text-[#4F7B8C] relative z-10" />
                     <div className="relative z-10">
-                        <h3 className="text-xl font-bold text-[#4F7B8C] mb-2">CRM & Nurturing</h3>
+                        <h3 className="text-xl font-bold text-[#4F7B8C] mb-2">CRM & Automatización</h3>
                         <p className="text-xs text-[#2C3E50] leading-relaxed">
-                            Automatizaciones que nutren al lead mientras duermes. Integración total.
+                            Seguimiento inteligente de leads mientras tu equipo se centra en cerrar operaciones.
+                        </p>
+                    </div>
+                </div>
+
+                {/* Card 5: Optimization (New) - Spans 1 col */}
+                <div className="md:col-span-1 bg-white border border-[#6599CB]/20 rounded-[2rem] p-8 hover-lift reveal delay-300 flex flex-col justify-between relative overflow-hidden">
+                    <div className="w-12 h-12 bg-[#F2994B]/10 rounded-xl flex items-center justify-center mb-6">
+                        <TrendingUp size={24} className="text-[#F2994B]" />
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-bold text-[#4F7B8C] mb-2">Optimización Continua</h3>
+                        <p className="text-xs text-[#2C3E50] leading-relaxed">
+                            Mejora constante basada en datos y comportamiento real del cliente.
                         </p>
                     </div>
                 </div>
@@ -619,18 +627,15 @@ const SuccessMetrics = () => (
             <div className="grid md:grid-cols-2 gap-20 items-center">
                 <div className="reveal">
                     <span className="type-label text-[#96D9CC] mb-4 block">Resultados Reales</span>
-                    <h2 className="type-h2 mb-6">El Impacto de la Excelencia</h2>
+                    <h2 className="type-h2 mb-6">Caso de Éxito: Inmobiliaria Boutique en Costa Brava</h2>
                     <p className="text-white/80 mb-10 text-lg leading-relaxed">
-                        Caso de estudio: Inmobiliaria Boutique en Costa Brava.
-                        <br />
-                        Pasamos de la invisibilidad digital a dominar el mercado local en 12 meses.
+                        Tres años de colaboración continua. De una presencia digital débil a un posicionamiento dominante en su mercado local.
                     </p>
 
                     <div className="p-8 bg-[#6599CB] rounded-3xl border border-[#96D9CC]/30 relative shadow-2xl text-white">
                         <span className="text-6xl absolute -top-4 -left-4 text-[#F2994B] opacity-50 font-serif">"</span>
                         <p className="italic text-lg mb-6 relative z-10">
-                            La diferencia es la calidad. Antes perdíamos horas filtrando correos basura.
-                            Ahora, cuando entra un lead, sabemos que es una visita potencial real. Hemos recuperado nuestro tiempo.
+                            La diferencia no es el volumen, es la calidad. Hoy cada lead tiene sentido y nuestro equipo trabaja con foco y tranquilidad.
                         </p>
                         <div className="flex items-center gap-4">
                             {/* IMAGEN 3: Avatar Testimonio */}
@@ -641,7 +646,7 @@ const SuccessMetrics = () => (
                             />
                             <div>
                                 <p className="font-bold text-white">Roberto V.</p>
-                                <p className="text-xs text-[#E1E1D7]">Director, Luxury Estates</p>
+                                <p className="text-xs text-[#E1E1D7]">Director Inmobiliaria Boutique</p>
                             </div>
                         </div>
                     </div>
@@ -650,20 +655,20 @@ const SuccessMetrics = () => (
                 <div className="grid grid-cols-2 gap-6 reveal delay-200">
                     <div className="bg-[#6599CB]/30 p-8 rounded-[2rem] backdrop-blur-sm border border-[#96D9CC]/20 flex flex-col justify-center text-center">
                         <TrendingUp className="text-[#F2994B] mx-auto mb-4" size={32} />
-                        <p className="type-h2 mb-2 text-white">+120%</p>
+                        <p className="type-h2 mb-2 text-white">+100%</p>
                         <p className="type-label text-[#96D9CC]">Leads Cualificados</p>
                     </div>
 
                     <div className="bg-[#6599CB]/30 p-8 rounded-[2rem] backdrop-blur-sm border border-[#96D9CC]/20 flex flex-col justify-center text-center">
                         <Star className="text-[#F2994B] mx-auto mb-4" size={32} />
                         <p className="type-h2 mb-2 text-white">TOP 3</p>
-                        <p className="type-label text-[#96D9CC]">Keywords Principales</p>
+                        <p className="type-label text-[#96D9CC]">en keywords estratégicas</p>
                     </div>
 
                     <div className="col-span-2 bg-[#E1E1D7] text-[#4F7B8C] p-8 rounded-[2rem] flex items-center justify-between">
                         <div>
-                            <p className="type-label text-[#6599CB] mb-2">Crecimiento Tráfico Orgánico</p>
-                            <p className="type-h2">3.5x</p>
+                            <p className="type-label text-[#6599CB] mb-2">Tráfico Orgánico</p>
+                            <p className="type-h2">x3.5</p>
                         </div>
                         <div className="flex items-end gap-2 h-16">
                             <div className="w-4 h-8 bg-[#6599CB]/20 rounded-t-lg"></div>
@@ -683,13 +688,12 @@ const StickyProcess = ({ navigateTo }) => (
             <div className="grid lg:grid-cols-2 gap-20">
                 {/* Sticky Left Content */}
                 <div className="lg:sticky lg:top-32 h-fit reveal">
-                    <span className="type-label text-[#6599CB] mb-4 block">Metodología Transparente</span>
+                    <span className="type-label text-[#6599CB] mb-4 block">Proceso Transparente</span>
                     <h2 className="type-h2 text-[#4F7B8C] mb-8 leading-tight">
-                        Simplicidad en el Proceso,<br />
-                        Complejidad en el Resultado.
+                        Cómo trabajamos contigo
                     </h2>
                     <p className="text-[#2C3E50] max-w-md mb-10 text-lg">
-                        Un roadmap claro de 4 fases diseñado para transformar tu presencia digital sin interrumpir tu operativa diaria.
+                        Un proceso claro y sin fricciones, diseñado para agencias que valoran el orden, la estrategia y la eficiencia.
                     </p>
 
                     {/* IMAGEN 4: Imagen de apoyo en sección Sticky */}
@@ -710,27 +714,27 @@ const StickyProcess = ({ navigateTo }) => (
                     {[
                         {
                             num: "01",
-                            title: "Auditoría Profunda (Gratis)",
-                            desc: "No adivinamos. Analizamos tu web actual, tu posicionamiento y tu competencia para identificar oportunidades de mejora inmediatas.",
-                            badge: "Valor: Incalculable"
+                            title: "Auditoría estratégica",
+                            desc: "Análisis profundo de tu web, captación y posicionamiento digital.",
+                            badge: "Diagnóstico"
                         },
                         {
                             num: "02",
-                            title: "Estrategia & Propuesta",
-                            desc: "Diseñamos un plan a medida con KPIs claros. Tendrás una hoja de ruta exacta de cómo vamos a lograr tus objetivos de captación.",
-                            badge: "Plan Personalizado"
+                            title: "Estrategia personalizada",
+                            desc: "Roadmap claro, KPIs definidos y prioridades reales.",
+                            badge: "Planificación"
                         },
                         {
                             num: "03",
-                            title: "Onboarding Profesional",
-                            desc: "Implementamos tu ecosistema: nueva web, configuración de campañas y CRM. Todo llave en mano en un plazo garantizado.",
-                            badge: "Sin Fricción"
+                            title: "Implementación integral",
+                            desc: "Web, marketing digital inmobiliario y CRM alineados.",
+                            badge: "Ejecución"
                         },
                         {
                             num: "04",
-                            title: "Optimización Continua",
-                            desc: "El lanzamiento es solo el inicio. Analizamos datos mensualmente para mejorar la calidad del lead y tu retorno de inversión.",
-                            badge: "Mejora Constante"
+                            title: "Optimización continua",
+                            desc: "Revisión mensual para mejorar calidad de leads y retorno.",
+                            badge: "Mejora"
                         }
                     ].map((step, i) => (
                         <div key={i} className="reveal group border-l-2 border-[#E1E1D7] pl-10 hover:border-[#6599CB] transition-colors duration-500">
@@ -752,20 +756,20 @@ const FAQSection = () => {
     const [openIndex, setOpenIndex] = useState(0);
     const faqs = [
         {
-            q: "¿Por qué limitan los clientes a solo 3 simultáneos?",
-            a: "Para garantizar la excelencia. Nuestro modelo boutique asegura que los fundadores gestionen directamente tu estrategia, ofreciendo una atención y rapidez que las grandes agencias no pueden igualar."
+            q: "¿Por qué trabajáis solo con pocos clientes?",
+            a: "Para garantizar atención directa, foco estratégico y resultados consistentes."
         },
         {
-            q: "¿Garantizan exclusividad geográfica?",
-            a: "Absolutamente. Si trabajamos contigo en una zona específica (ej. La Moraleja o Marbella Milla de Oro), bloqueamos la entrada a tus competidores directos en esa área para no diluir resultados."
+            q: "¿Ofrecéis exclusividad geográfica?",
+            a: "Sí. No trabajamos con agencias competidoras en la misma zona."
         },
         {
-            q: "¿Cuánto tiempo toma ver resultados tangibles?",
-            a: "Depende del canal. Google Ads genera tráfico cualificado desde la primera semana. El SEO y la autoridad de marca son activos que se construyen sólidamente entre el mes 3 y 6."
+            q: "¿Cuándo se ven resultados?",
+            a: "Publicidad digital: desde las primeras semanas. SEO inmobiliario: entre el mes 3 y 6."
         },
         {
-            q: "¿Qué obtengo realmente con la Auditoría Gratuita?",
-            a: "Un diagnóstico honesto y profesional. Revisamos tu tecnología, tu visibilidad y tu conversión. Te llevas un plan de acción claro, independientemente de si decides trabajar con nosotros o no."
+            q: "¿Qué incluye la auditoría estratégica?",
+            a: "Un diagnóstico claro de tu marketing digital para inmobiliarias y un plan de acción, sin compromiso."
         }
     ];
 
@@ -773,7 +777,7 @@ const FAQSection = () => {
         <section className="py-32 px-6 bg-white border-t border-[#E1E1D7]">
             <div className="container mx-auto max-w-3xl">
                 <div className="text-center mb-16">
-                    <span className="type-label text-[#6599CB] mb-4 block">Transparencia Radical</span>
+                    <span className="type-label text-[#6599CB] mb-4 block">Transparencia Total</span>
                     <h2 className="type-h2 text-[#4F7B8C]">Preguntas Frecuentes</h2>
                 </div>
                 <div className="space-y-4">
@@ -862,7 +866,8 @@ const Footer = ({ navigateTo }) => (
                 <div className="max-w-xl">
                     <h2 className="type-display mb-8">Construyamos <br /> tu Legado.</h2>
                     <p className="text-[#E1E1D7] mb-12 text-lg">
-                        La excelencia digital no es una opción en el mercado de lujo. Es el estándar.
+                        Agencia especializada en marketing digital para inmobiliarias boutique y de lujo.<br />
+                        Estrategia, captación y sistemas digitales integrados.
                     </p>
                     <Button variant="white" onClick={() => navigateTo && navigateTo('contact')}>Hablar con un Experto</Button>
                 </div>
@@ -876,9 +881,12 @@ const Footer = ({ navigateTo }) => (
             </div>
 
             <div className="border-t border-[#6599CB] pt-10 flex flex-col md:flex-row justify-between items-center text-[#96D9CC] text-sm">
-                <div className="flex items-center gap-3 mb-6 md:mb-0">
-                    <RukaLogo className="h-6" />
-                    <span className="text-white">© 2025 RUK. AGENCY</span>
+                <div className="flex flex-col gap-2 mb-6 md:mb-0">
+                    <div className="flex items-center gap-3">
+                        <RukaLogo className="h-6" />
+                        <span className="text-white">© 2025 RUK.AGENCY. Todos los derechos reservados.</span>
+                    </div>
+                    <span className="text-[#96D9CC]/70 text-xs">Agencia de Marketing Digital para Inmobiliarias · España</span>
                 </div>
                 <div className="flex flex-wrap justify-center gap-8">
                     <span className="cursor-pointer hover:text-white">Política de Privacidad</span>
@@ -959,9 +967,13 @@ export default function App() {
                             <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#96D9CC] rounded-full blur-[100px] opacity-30 -mr-20 -mt-20"></div>
 
-                            <h2 className="type-h2 mb-8 relative z-10">¿Listo para escalar?</h2>
+                            <h2 className="type-h2 mb-8 relative z-10">Eleva tu Agencia con una<br />Estrategia Digital a la Altura</h2>
+                            <p className="text-white/90 max-w-2xl mx-auto mb-10 text-lg relative z-10">
+                                Trabajamos con un número muy limitado de inmobiliarias boutique en España.
+                                Si buscas un partner estratégico, no un proveedor, hablemos.
+                            </p>
                             <div className="flex justify-center relative z-10">
-                                <Button variant="white" onClick={() => setPage('contact')}>Solicitar Auditoría</Button>
+                                <Button variant="white" onClick={() => setPage('contact')}>Solicitar Auditoría Estratégica</Button>
                             </div>
                         </div>
                     </section>
