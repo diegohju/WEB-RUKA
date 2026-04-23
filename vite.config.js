@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 export default defineConfig({
-    plugins: [
-        react({
-            // Fast Refresh optimizado
-            fastRefresh: true,
-        })
-    ],
+    plugins: [react({
+        // Fast Refresh optimizado
+        fastRefresh: true,
+    }), cloudflare()],
     base: '/',
     // Optimizaciones de rendimiento
     build: {
