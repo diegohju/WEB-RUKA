@@ -30,3 +30,25 @@ yarn-error.log*
 # Cache
 .cache/
 .parcel-cache/
+
+# Documents & media (no son código)
+*.docx
+*.doc
+*.xlsx
+*.pdf
+*.lpop
+"Captura de pantalla*"
+Captura\ de\ pantalla*
+*.png
+!public/*.png
+!public/favicon.png
+*.jpg
+!public/*.jpg
+RUKA\ AGENCY*.docx
+ESTRATEGIA*.docx
+Plan*.docx
+marketing\ digital*.png
+RUKA\ AGENCY*.png
+
+# Temp Office files
+~$*

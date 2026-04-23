@@ -4,7 +4,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RUK. AGENCY - Ecosistema Digital Premium</title>
+  <title>Rukaa | Marketing Digital para Inmobiliarias Exclusivas</title>
+  <meta name="description"
+      content="Transformamos agencias en líderes de mercado creando ecosistemas que atraen compradores de alto valor mientras tu equipo cierra más ventas.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  <!-- Google Consent Mode v2 Default State -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+
+    // Check for existing consent in localStorage to avoid flashes/flicker
+    const savedConsent = localStorage.getItem('cookie-consent');
+    if (savedConsent) {
+      const consent = JSON.parse(savedConsent);
+      gtag('consent', 'default', {
+        'ad_storage': consent.marketing ? 'granted' : 'denied',
+        'ad_user_data': consent.marketing ? 'granted' : 'denied',
+        'ad_personalization': consent.marketing ? 'granted' : 'denied',
+        'analytics_storage': consent.analytics ? 'granted' : 'denied',
+        'functionality_storage': 'granted',
+        'personalization_storage': 'granted',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+      });
+    } else {
+      // Default: Denied for all non-essential
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'functionality_storage': 'granted',
+        'personalization_storage': 'granted',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+      });
+    }
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+          w[l] = w[l] || []; w[l].push({
+              'gtm.start':
+                  new Date().getTime(), event: 'gtm.js'
+          }); var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                  'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-NZLCZQPH');</script>
+  <!-- End Google Tag Manager -->
 
   <!-- Start Single Page Apps for GitHub Pages -->
   <script type="text/javascript">
@@ -23,10 +74,19 @@
   </script>
   <!-- End Single Page Apps for GitHub Pages -->
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://https://whdbgwvqkdfubpbfiaks.supabase.co" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://cdn.sanity.io" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
 </head>
 
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NZLCZQPH" height="0" width="0"
+          style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>

@@ -1,6 +1,7 @@
 {
   "name": "web-ruka",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
@@ -12,10 +13,21 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@portabletext/react": "^6.0.3",
+    "@sanity/client": "^7.21.0",
+    "@sanity/image-url": "^2.1.1",
     "@vitejs/plugin-react": "^5.1.1",
+    "framer-motion": "^12.23.26",
     "lucide-react": "^0.556.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
+    "react-helmet-async": "^3.0.0",
+    "react-router-dom": "^7.14.2",
     "vite": "^7.2.6"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.10",
+    "tailwindcss": "^3.4.1"
   }
 }
