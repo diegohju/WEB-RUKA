@@ -11,6 +11,28 @@ import { useLanguage } from './App.jsx'
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 
+// Construye la ruta completa del post incluyendo categoría (para SEO)
+// Resultado: "seo-inmobiliario/mi-articulo" o "mi-articulo" si no hay categoría
+const buildBlogPath = (post) => {
+  const categorySlug = post.categories?.[0]?.slug?.current
+  const postSlug = post.slug?.current
+  return categorySlug ? `${categorySlug}/${postSlug}` : postSlug
+}
+
+// Extrae solo el slug del post desde un path que puede incluir categoría
+// Entrada: "seo-inmobiliario/mi-articulo" → Salida: "mi-articulo"
+const extractPostSlug = (path) => {
+  if (!path) return path
+  return path.includes('/') ? path.split('/').pop() : path
+}
+
+// Helper para obtener el campo localizado de Sanity
+const getLocalized = (field, lang) => {
+  if (!field) return null
+  if (typeof field === 'string' || Array.isArray(field)) return field
+  return field[lang] || field.es || null
+}
+
 const formatDate = (dateString, lang) => {
   if (!dateString) return ''
   return new Date(dateString).toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {
@@ -107,7 +129,7 @@ const PostCard = ({ post, onNavigate, featured = false }) => {
 
   return (
     <article
-      onClick={() => onNavigate('blog-post', post.slug.current)}
+      onClick={() => onNavigate('blog-post', buildBlogPath(post))}
       className={`group glass-panel rounded-[2rem] overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl hover:bg-white/60 hover:-translate-y-1 flex flex-col ${featured ? 'md:col-span-2 lg:col-span-2' : ''}`}
     >
       {/* Imagen */}
@@ -115,7 +137,7 @@ const PostCard = ({ post, onNavigate, featured = false }) => {
         {imageUrl ? (
           <img
             src={imageUrl}
-            alt={post.mainImage?.alt || post.title}
+            alt={getLocalized(post.mainImage?.alt, language) || getLocalized(post.title, language)}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />
@@ -168,11 +190,11 @@ const PostCard = ({ post, onNavigate, featured = false }) => {
         </div>
 
         <h2 className={`font-bold text-[#2C3E50] mb-3 group-hover:text-[#4F7B8C] transition-colors tracking-tight leading-tight ${featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
-          {post.title}
+          {getLocalized(post.title, language)}
         </h2>
-        {post.excerpt && (
+        {getLocalized(post.excerpt, language) && (
           <p className="text-[#64748B] text-sm leading-relaxed mb-5 line-clamp-2">
-            {post.excerpt}
+            {getLocalized(post.excerpt, language)}
           </p>
         )}
 
@@ -237,9 +259,11 @@ export const BlogPage = ({ onNavigate }) => {
   ]
 
   const filtered = posts.filter((post) => {
+    const titleText = getLocalized(post.title, language) || ''
+    const excerptText = getLocalized(post.excerpt, language) || ''
     const matchSearch =
-      post.title?.toLowerCase().includes(search.toLowerCase()) ||
-      post.excerpt?.toLowerCase().includes(search.toLowerCase())
+      titleText.toLowerCase().includes(search.toLowerCase()) ||
+      excerptText.toLowerCase().includes(search.toLowerCase())
     const matchCat =
       activeCategory === 'all' ||
       post.categories?.some((c) => c.slug?.current === activeCategory)
@@ -279,10 +303,13 @@ export const BlogPage = ({ onNavigate }) => {
               </div>
             </div>
             <h1 className="mb-4 text-[#4F7B8C]">
-              <span className="type-display font-bold uppercase tracking-tight block">
+              <span className="type-display font-bold uppercase tracking-tight mb-2 !text-4xl sm:!text-5xl md:!text-6xl lg:!text-[72px]">
                 {language === 'es' ? 'Estrategias que' : 'Strategies that'}
               </span>
-              <span className="type-h2-serif text-[#6599CB]">{language === 'es' ? 'mueven el mercado' : 'move the market'}</span>
+              <br />
+              <span className="type-h2-serif text-[#6599CB] !text-4xl sm:!text-5xl md:!text-6xl lg:!text-[72px]">
+                {language === 'es' ? 'mueven el mercado' : 'move the market'}
+              </span>
             </h1>
             <p className="type-body text-[#64748B] max-w-2xl mx-auto text-lg leading-relaxed mb-6">
               {language === 'es' 
@@ -304,7 +331,7 @@ export const BlogPage = ({ onNavigate }) => {
                   className="w-full pl-12 pr-4 py-4 md:py-3.5 bg-white rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-[#6599CB]/40 text-[#2C3E50] placeholder-[#94A3B8] text-sm font-medium shadow-sm transition-all"
                 />
               </div>
-              <div className="flex gap-2 flex-wrap">
+              <div className="hidden gap-2 flex-wrap">
                 {categories.map((cat) => (
                   <button
                     key={cat.slug?.current || cat.slug}
@@ -394,11 +421,14 @@ export const BlogPostPage = ({ slug, onNavigate }) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // El slug recibido puede ser "categoria/post-slug" — extraemos solo el slug del post
+  const postSlug = extractPostSlug(slug)
+
   useEffect(() => {
     if (!slug) return
     Promise.all([
-      sanityClient.fetch(POST_BY_SLUG_QUERY, { slug }),
-      sanityClient.fetch(RECENT_POSTS_QUERY, { currentSlug: slug }),
+      sanityClient.fetch(POST_BY_SLUG_QUERY, { slug: postSlug }),
+      sanityClient.fetch(RECENT_POSTS_QUERY, { currentSlug: postSlug }),
     ])
       .then(([postData, relatedData]) => {
         setPost(postData)
@@ -444,9 +474,11 @@ export const BlogPostPage = ({ slug, onNavigate }) => {
   }
 
   const siteUrl = 'https://rukaa.es'
-  const postUrl = `${siteUrl}/blog/${post.slug?.current || slug}`
-  const seoTitle = post.seoTitle || post.title
-  const seoDesc = post.seoDescription || post.excerpt
+  // La URL pública usa el path completo (con categoría si existe)
+  const postPath = buildBlogPath(post) || slug
+  const postUrl = `${siteUrl}/blog/${postPath}`
+  const seoTitle = getLocalized(post.seoTitle, language) || getLocalized(post.title, language)
+  const seoDesc = getLocalized(post.seoDescription, language) || getLocalized(post.excerpt, language)
   const ogImageUrl = post.ogImage?.asset
     ? urlFor(post.ogImage).width(1200).height(630).url()
     : post.mainImage?.asset
@@ -484,7 +516,7 @@ export const BlogPostPage = ({ slug, onNavigate }) => {
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'Article',
-          headline: post.title,
+          headline: getLocalized(post.title, language),
           description: seoDesc,
           image: ogImageUrl,
           datePublished: post.publishedAt,
@@ -542,7 +574,7 @@ export const BlogPostPage = ({ slug, onNavigate }) => {
 
               {/* Título */}
               <h1 className="text-4xl md:text-5xl font-black text-[#2C3E50] mb-6 tracking-tight leading-tight">
-                {post.title}
+                {getLocalized(post.title, language)}
               </h1>
 
               {/* Meta */}
@@ -585,13 +617,13 @@ export const BlogPostPage = ({ slug, onNavigate }) => {
                     href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#0077b5]/10 text-[#0077b5] font-bold hover:bg-[#0077b5]/20 transition-all text-xs"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#0077b5]/10 text-[#0077b5] font-bold hover:bg-[#0077b5]/20 transition-all text-xs whitespace-nowrap"
                   >
                     <Linkedin size={14} /> {language === 'es' ? 'Compartir' : 'Share'}
                   </a>
                   <button
                     onClick={copyUrl}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-[#cbd5e1] text-[#64748B] hover:bg-white hover:text-[#4F7B8C] hover:border-[#6599CB]/50 transition-all text-xs font-bold bg-white/50"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-[#cbd5e1] text-[#64748B] hover:bg-white hover:text-[#4F7B8C] hover:border-[#6599CB]/50 transition-all text-xs font-bold bg-white/50 whitespace-nowrap"
                   >
                     {copied ? <CheckCircle2 size={14} className="text-[#F2994B]" /> : <Link2 size={14} />}
                     {copied ? (language === 'es' ? '¡Copiado!' : 'Copied!') : (language === 'es' ? 'Copiar url' : 'Copy url')}
@@ -604,7 +636,7 @@ export const BlogPostPage = ({ slug, onNavigate }) => {
                 <figure className="mb-12">
                   <img
                     src={urlFor(post.mainImage).width(840).url()}
-                    alt={post.mainImage.alt || post.title}
+                    alt={getLocalized(post.mainImage.alt, language) || getLocalized(post.title, language)}
                     className="w-full rounded-3xl shadow-2xl"
                   />
                 </figure>
@@ -612,8 +644,8 @@ export const BlogPostPage = ({ slug, onNavigate }) => {
 
               {/* Cuerpo del artículo */}
               <div className="prose-ruka">
-                {post.body && (
-                  <PortableText value={post.body} components={portableTextComponents} />
+                {getLocalized(post.body, language) && (
+                  <PortableText value={getLocalized(post.body, language)} components={portableTextComponents} />
                 )}
               </div>
 
@@ -659,7 +691,7 @@ export const BlogPostPage = ({ slug, onNavigate }) => {
                   <p className="text-xs font-bold tracking-widest uppercase text-[#6599CB] mb-3 flex items-center gap-2">
                     <Tag size={13} /> {language === 'es' ? 'Tema principal' : 'Focus keyword'}
                   </p>
-                  <p className="text-[#2C3E50] font-semibold">{post.focusKeyword}</p>
+                  <p className="text-[#2C3E50] font-semibold">{getLocalized(post.focusKeyword, language)}</p>
                 </div>
               )}
 
@@ -673,20 +705,20 @@ export const BlogPostPage = ({ slug, onNavigate }) => {
                     {related.map((rel) => (
                       <button
                         key={rel._id}
-                        onClick={() => onNavigate('blog-post', rel.slug.current)}
+                        onClick={() => onNavigate('blog-post', buildBlogPath(rel))}
                         className="w-full text-left group"
                       >
                         <div className="flex gap-3 items-start">
                           {rel.mainImage?.asset && (
                             <img
                               src={urlFor(rel.mainImage).width(72).height(72).url()}
-                              alt={rel.mainImage.alt || rel.title}
+                              alt={getLocalized(rel.mainImage.alt, language) || getLocalized(rel.title, language)}
                               className="w-16 h-16 rounded-xl object-cover shrink-0"
                             />
                           )}
                           <div>
                             <p className="text-sm font-bold text-[#2C3E50] group-hover:text-[#6599CB] transition-colors leading-tight mb-1">
-                              {rel.title}
+                              {getLocalized(rel.title, language)}
                             </p>
                             {rel.readTime && (
                               <p className="text-xs text-[#64748B] flex items-center gap-1">

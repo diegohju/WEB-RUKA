@@ -1923,7 +1923,7 @@ const Footer = ({ navigateTo }) => {
                 <LanguageToggle isFooter={true} className="scale-90" />
             </div>
 
-            <a href="#" className="hover:text-white transition-colors underline underline-offset-4 decoration-white/30">{language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); navigateTo('politica-privacidad'); }} className="hover:text-white transition-colors underline underline-offset-4 decoration-white/30">{language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}</a>
             <p className="italic">{language === 'es' ? 'Agencia de Marketing Digital para Inmobiliarias · España' : 'Digital Marketing Agency for Real Estate · Spain'}</p>
         </div>
     </footer>
@@ -2161,7 +2161,7 @@ const ROICalculator = ({ language }) => {
                     </div>
                 </div>
 
-                <div className="bg-[#2C3E50] p-6 rounded-[2rem] text-center text-white shadow-xl">
+                <div className="bg-[#2C3E50] p-6 rounded-[2rem] text-center text-white shadow-xl mb-6">
                     <div className="flex justify-between items-center mb-1">
                         <span className="text-xs font-light opacity-80">{language === 'es' ? 'ROI Estimado' : 'Estimated ROI'}</span>
                         <span className="bg-[#96D9CC] text-[#2C3E50] text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest">{language === 'es' ? 'ALTO RENDIMIENTO' : 'HIGH PERFORMANCE'}</span>
@@ -2169,6 +2169,14 @@ const ROICalculator = ({ language }) => {
                     <div className="text-5xl font-black mb-1">x{roi}</div>
                     <p className="text-[10px] opacity-60 uppercase tracking-widest">{language === 'es' ? 'Retorno sobre inversión publicitaria' : 'Return on ad spend'}</p>
                 </div>
+                
+                <button 
+                    onClick={() => window.print()}
+                    className="w-full bg-[#6599CB] text-white py-4 rounded-xl font-bold hover:bg-[#4F7B8C] transition-colors flex items-center justify-center gap-2 shadow-lg"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    {language === 'es' ? 'Descargar Reporte (PDF)' : 'Download Report (PDF)'}
+                </button>
             </div>
 
             {/* Blob Decorativo */}
@@ -2179,22 +2187,48 @@ const ROICalculator = ({ language }) => {
 
 const RecursosPage = () => {
     const { language } = useLanguage();
+    
     const resources = language === 'es' 
-        ? ['Checklist SEO', 'Calculadora ROI', 'Guía Ads'] 
-        : ['SEO Checklist', 'ROI Calculator', 'Ads Guide'];
+        ? [
+            { title: 'Checklist SEO', desc: 'Guía paso a paso para optimizar la web de tu inmobiliaria.', url: '/recursos/checklist-seo.pdf' },
+            { title: 'Calculadora ROI', desc: 'Plantilla en PDF con la fórmula exacta de rentabilidad.', url: '/recursos/calculadora-roi.pdf' },
+            { title: 'Guía Ads', desc: 'Estrategias de captación para clientes y propiedades premium.', url: '/recursos/guia-ads.pdf' }
+          ]
+        : [
+            { title: 'SEO Checklist', desc: 'Step by step guide to optimize your real estate website.', url: '/recursos/checklist-seo.pdf' },
+            { title: 'ROI Calculator', desc: 'PDF template with the exact profitability formula.', url: '/recursos/calculadora-roi.pdf' },
+            { title: 'Ads Guide', desc: 'Premium lead generation strategies for properties.', url: '/recursos/guia-ads.pdf' }
+          ];
 
     return (
-        <div className="pt-40 pb-20 px-6 page-fade-in">
-            <div className="container mx-auto max-w-7xl text-center mb-20">
-                <h1 className="type-h1 text-[#2C3E50] mb-6">{language === 'es' ? 'Recursos Gratuitos' : 'Free Resources'}</h1>
-                <p className="type-body max-w-2xl mx-auto">{language === 'es' ? 'Guías y herramientas para agentes de alto nivel.' : 'Guides and tools for high-level agents.'}</p>
-            </div>
-            <div className="container mx-auto max-w-7xl">
-                <div className="grid md:grid-cols-2 gap-12 items-start mb-20 px-6">
+        <div className="pt-36 md:pt-40 pb-24 px-6 page-fade-in relative min-h-screen">
+            {/* Background Layers */}
+            <div className="grain-overlay" />
+            <div className="animated-blob blob-1" />
+            <div className="animated-blob blob-3" />
+
+            <div className="container mx-auto max-w-7xl relative z-10">
+                {/* Header */}
+                <div className="text-center mb-16 page-fade-in">
+                    <h1 className="mb-4 text-[#4F7B8C]">
+                        <span className="type-display font-bold uppercase tracking-tight mb-2 !text-4xl sm:!text-5xl md:!text-6xl lg:!text-[72px]">
+                            {language === 'es' ? 'Recursos' : 'Free'}
+                        </span>
+                        <br />
+                        <span className="type-h2-serif text-[#6599CB] !text-4xl sm:!text-5xl md:!text-6xl lg:!text-[72px]">
+                            {language === 'es' ? 'Gratuitos' : 'Resources'}
+                        </span>
+                    </h1>
+                    <p className="type-body text-[#64748B] max-w-2xl mx-auto text-lg leading-relaxed mb-6">
+                        {language === 'es' ? 'Guías y herramientas para agentes de alto nivel.' : 'Guides and tools for high-level agents.'}
+                    </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-12 items-start px-6 mb-16">
                     {/* Explicación a la izquierda */}
-                    <div className="reveal order-2 md:order-1">
+                    <div className="reveal order-2 md:order-1 glass-panel p-8 md:p-12 rounded-[2rem] shadow-xl">
                         <Badge variant="accent" className="mb-6">{language === 'es' ? 'HERRAMIENTA EXCLUSIVA' : 'EXCLUSIVE TOOL'}</Badge>
-                        <h2 className="type-h2 text-[#4F7B8C] mb-8">
+                        <h2 className="text-3xl font-bold text-[#2C3E50] mb-6 tracking-tight">
                             {language === 'es' ? 'Calculadora de Rentabilidad Inmobiliaria' : 'Real Estate Profitability Calculator'}
                         </h2>
                         <div className="space-y-6 text-[#64748B] text-lg leading-relaxed">
@@ -2217,22 +2251,96 @@ const RecursosPage = () => {
                     </div>
                 </div>
 
-                <div className="px-6 mb-20 text-center">
-                    <h3 className="type-h3 text-[#2C3E50] mb-12">{language === 'es' ? 'Otros recursos útiles' : 'Other useful resources'}</h3>
-                    <div className="grid md:grid-cols-3 gap-8">
+                {/* Descargables (Cards) */}
+                <div className="px-6 mb-12 text-center page-fade-in relative z-20">
+                    <h3 className="type-h3 text-[#2C3E50] mb-8">{language === 'es' ? 'Descarga nuestros Recursos' : 'Download our Resources'}</h3>
+                    <div className="grid md:grid-cols-3 gap-6 text-left">
                         {resources.map((r, i) => (
-                            <div key={i} className="glass-panel p-8 rounded-3xl hover:bg-[#6599CB] group transition-colors">
-                                <h3 className="text-xl font-bold text-[#4F7B8C] group-hover:text-white mb-2">{r}</h3>
-                                <p className="text-sm text-[#64748B] group-hover:text-white/80 mb-6">
-                                    {language === 'es' ? 'Recurso descargable exclusivo.' : 'Exclusive downloadable resource.'}
+                            <a 
+                                key={i} 
+                                href={r.url} 
+                                download 
+                                className="glass-panel p-8 rounded-[2rem] bg-white/40 hover:bg-white/80 group transition-all duration-400 hover:-translate-y-2 shadow-sm hover:shadow-2xl border border-white/60 flex flex-col"
+                            >
+                                <div className="w-14 h-14 bg-[#6599CB]/10 rounded-2xl flex items-center justify-center text-[#6599CB] mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><polyline points="9 15 12 18 15 15"></polyline></svg>
+                                </div>
+                                <h3 className="text-xl font-bold text-[#2C3E50] mb-3 group-hover:text-[#6599CB] transition-colors">{r.title}</h3>
+                                <p className="text-sm text-[#64748B] mb-8 leading-relaxed flex-1">
+                                    {r.desc}
                                 </p>
-                                <button className="text-xs font-bold uppercase tracking-widest text-[#F2994B] group-hover:text-white">
-                                    {language === 'es' ? 'Descargar' : 'Download'}
-                                </button>
-                            </div>
+                                <span className="text-xs font-bold uppercase tracking-widest text-[#F2994B] flex items-center gap-2 group-hover:text-[#4F7B8C] transition-colors mt-auto">
+                                    {language === 'es' ? 'Descargar' : 'Download'} <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                                </span>
+                            </a>
                         ))}
                     </div>
                 </div>
+            </div>
+        </div>
+    );
+};
+
+const PrivacyPolicyPage = () => {
+    const { language } = useLanguage();
+    
+    return (
+        <div className="pt-40 pb-20 px-6 page-fade-in relative overflow-hidden">
+            <div className="container mx-auto max-w-4xl relative z-10 glass-panel p-8 md:p-12 rounded-[2rem]">
+                <h1 className="text-3xl font-bold mb-6 text-[#2C3E50]">
+                    {language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
+                </h1>
+                {language === 'es' ? (
+                    <div className="text-[#64748B] space-y-6 text-sm md:text-base leading-relaxed">
+                        <p><strong>1. Información General</strong></p>
+                        <p>En cumplimiento de lo dispuesto en el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo (RGPD), y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), RUKAA AGENCY te informa que los datos de carácter personal que proporciones a través de esta página web serán tratados con estricta confidencialidad.</p>
+                        
+                        <p><strong>2. Responsable del Tratamiento</strong></p>
+                        <p>El responsable del tratamiento de los datos es RUKAA AGENCY. Puedes contactarnos a través del correo electrónico: hola@rukaa.es.</p>
+
+                        <p><strong>3. Finalidad del Tratamiento</strong></p>
+                        <p>Los datos personales que recabamos a través de los formularios de contacto o correos electrónicos se utilizarán exclusivamente para:</p>
+                        <ul className="list-disc pl-5 space-y-2">
+                            <li>Atender a tus consultas, solicitudes de auditoría o peticiones de información.</li>
+                            <li>Gestionar la relación comercial o profesional.</li>
+                            <li>Enviar comunicaciones comerciales sobre nuestros servicios (siempre que nos hayas dado tu consentimiento expreso).</li>
+                        </ul>
+
+                        <p><strong>4. Legitimación</strong></p>
+                        <p>La base legal para el tratamiento de tus datos es tu consentimiento expreso, otorgado al marcar la casilla de aceptación y enviar el formulario de contacto.</p>
+
+                        <p><strong>5. Conservación de los Datos</strong></p>
+                        <p>Tus datos se conservarán mientras se mantenga la relación comercial, o durante los años necesarios para cumplir con las obligaciones legales aplicables.</p>
+
+                        <p><strong>6. Derechos del Usuario</strong></p>
+                        <p>Tienes derecho a obtener confirmación sobre si en RUKAA AGENCY estamos tratando tus datos personales. Por tanto, tienes derecho a acceder a tus datos personales, rectificar los datos inexactos o solicitar su supresión cuando los datos ya no sean necesarios. Podrás ejercer tus derechos enviando un email a hola@rukaa.es.</p>
+                    </div>
+                ) : (
+                    <div className="text-[#64748B] space-y-6 text-sm md:text-base leading-relaxed">
+                        <p><strong>1. General Information</strong></p>
+                        <p>In compliance with the provisions of Regulation (EU) 2016/679 of the European Parliament and of the Council (GDPR), RUKAA AGENCY informs you that the personal data you provide through this website will be treated with strict confidentiality.</p>
+                        
+                        <p><strong>2. Data Controller</strong></p>
+                        <p>The data controller is RUKAA AGENCY. You can contact us via email at: hola@rukaa.es.</p>
+
+                        <p><strong>3. Purpose of Processing</strong></p>
+                        <p>The personal data we collect through contact forms or emails will be used exclusively for:</p>
+                        <ul className="list-disc pl-5 space-y-2">
+                            <li>Responding to your inquiries, audit requests, or information requests.</li>
+                            <li>Managing the commercial or professional relationship.</li>
+                            <li>Sending commercial communications about our services (provided you have given your explicit consent).</li>
+                        </ul>
+
+                        <p><strong>4. Legitimation</strong></p>
+                        <p>The legal basis for the processing of your data is your explicit consent, granted by checking the acceptance box and submitting the contact form.</p>
+
+                        <p><strong>5. Data Retention</strong></p>
+                        <p>Your data will be kept as long as the commercial relationship is maintained, or for the years necessary to comply with applicable legal obligations.</p>
+
+                        <p><strong>6. User Rights</strong></p>
+                        <p>You have the right to obtain confirmation as to whether RUKAA AGENCY is processing your personal data. Therefore, you have the right to access your personal data, rectify inaccurate data, or request its deletion when the data is no longer necessary. You can exercise your rights by sending an email to hola@rukaa.es.</p>
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -2478,6 +2586,7 @@ const ContactPage = () => {
             '/especializacion': 'especializacion',
             '/casos-exito': 'casos-exito',
             '/recursos': 'recursos',
+            '/politica-privacidad': 'politica-privacidad',
         };
         return { page: pageMap[pathname.replace(/\/$/, '')] || 'home', blogSlug: null };
     };
@@ -2510,6 +2619,7 @@ const ContactPage = () => {
             'recursos': 'Recursos Gratuitos para Inmobiliarias',
             'contacto': 'Solicita tu Auditoría - Hablemos',
             'blog': 'Blog - Estrategias de Marketing Inmobiliario',
+            'politica-privacidad': 'Política de Privacidad - Rukaa Agency',
         } : {
             'home': 'Rukaa | Digital Marketing for Exclusive Real Estate',
             'sobre-nosotros': 'About Rukaa: Specialized Real Estate Marketing Team',
@@ -2520,16 +2630,19 @@ const ContactPage = () => {
             'recursos': 'Free Resources for Real Estate',
             'contacto': 'Request Your Audit - Let\'s Talk',
             'blog': 'Blog - Real Estate Marketing Strategies',
+            'politica-privacidad': 'Privacy Policy - Rukaa Agency',
         };
 
         const descriptions = language === 'es' ? {
             'home': 'Transformamos agencias en líderes de mercado creando ecosistemas que atraen compradores de alto valor mientras tu equipo cierra más ventas.',
             'sobre-nosotros': 'Conoce al equipo de Rukaa, expertos en marketing digital especializados exclusivamente en el sector inmobiliario boutique y de lujo.',
             'contacto': 'Solicita una auditoría gratuita de tu estrategia digital y descubre cómo podemos ayudarte a captar propiedades y leads de calidad.',
+            'politica-privacidad': 'Política de Privacidad de Rukaa Agency.',
         } : {
             'home': 'We transform agencies into market leaders by creating ecosystems that attract high-value buyers while your team closes more sales.',
             'sobre-nosotros': 'Meet the Rukaa team, digital marketing experts specialized exclusively in the boutique and luxury real estate sector.',
             'contacto': 'Request a free audit of your digital strategy and discover how we can help you capture quality properties and leads.',
+            'politica-privacidad': 'Privacy Policy for Rukaa Agency.',
         };
         
         if (page !== 'blog-post') {
@@ -2596,6 +2709,7 @@ const ContactPage = () => {
                 {page === 'recursos' && <RecursosPage />}
                 {page === 'sobre-nosotros' && <SobreNosotrosPage navigateTo={navigateTo} />}
                 {page === 'contacto' && <ContactPage />}
+                {page === 'politica-privacidad' && <PrivacyPolicyPage />}
 
                 {/* Blog */}
                 {page === 'blog' && !blogSlug && (

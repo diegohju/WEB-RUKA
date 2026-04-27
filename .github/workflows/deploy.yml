@@ -1,53 +1,42 @@
-name: Deploy to GitHub Pages
+name: Desplegar Web (Automático)
 
 on:
+  # 1. Se ejecuta al subir código nuevo a GitHub
   push:
     branches:
       - main
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+      - master
+  
+  # 2. Se ejecuta cuando Sanity envía la señal de "Post Publicado"
+  repository_dispatch:
+    types: [sanity-publish]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist'
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    - name: 🚚 Descargar código
+      uses: actions/checkout@v4
+    
+    - name: 🏗 Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: 📦 Instalar dependencias
+      run: npm install
+      
+    - name: 🔨 Construir Web y generar Sitemap
+      env:
+        VITE_SANITY_PROJECT_ID: ${{ secrets.VITE_SANITY_PROJECT_ID }}
+      run: npm run build
+      
+    - name: 📂 Subir a cPanel por FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./dist/
+        # Si tu dominio principal apunta a public_html, pon: /public_html/
+        # server-dir: /public_html/ 

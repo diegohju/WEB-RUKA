@@ -23,19 +23,16 @@ export const postSchema = {
     {
       name: 'title',
       title: 'Título del Artículo',
-      type: 'string',
+      type: 'localeString',
       group: 'content',
       description: 'El título principal que verán los lectores.',
-      validation: (R) => R.required().min(10).max(100),
     },
     {
       name: 'excerpt',
       title: 'Resumen / Introducción',
-      type: 'text',
-      rows: 3,
+      type: 'localeText',
       group: 'content',
       description: 'Un párrafo breve que resume el artículo. Aparece en la lista del Blog.',
-      validation: (R) => R.required().max(250),
     },
     {
       name: 'mainImage',
@@ -48,10 +45,9 @@ export const postSchema = {
       fields: [
         {
           name: 'alt',
-          type: 'string',
+          type: 'localeString',
           title: '🖼️ Texto Alternativo (ALT TEXT)',
           description: 'Describe la imagen para Google y para accesibilidad. Ej: "Agente inmobiliario mostrando villa de lujo en Costa Brava"',
-          validation: (R) => R.required().warning('El ALT TEXT es fundamental para el SEO de imágenes.'),
         },
       ],
       validation: (R) => R.required(),
@@ -59,94 +55,29 @@ export const postSchema = {
     {
       name: 'body',
       title: 'Contenido del Artículo',
-      type: 'array',
+      type: 'localeBlock',
       group: 'content',
-      of: [
-        {
-          type: 'block',
-          styles: [
-            { title: 'Párrafo', value: 'normal' },
-            { title: 'H2', value: 'h2' },
-            { title: 'H3', value: 'h3' },
-            { title: 'H4', value: 'h4' },
-            { title: 'Cita destacada', value: 'blockquote' },
-          ],
-          marks: {
-            decorators: [
-              { title: 'Negrita', value: 'strong' },
-              { title: 'Cursiva', value: 'em' },
-              { title: 'Código', value: 'code' },
-            ],
-            annotations: [
-              {
-                name: 'link',
-                type: 'object',
-                title: 'Enlace',
-                fields: [
-                  {
-                    name: 'href',
-                    type: 'url',
-                    title: 'URL',
-                  },
-                  {
-                    name: 'blank',
-                    type: 'boolean',
-                    title: 'Abrir en nueva pestaña',
-                    initialValue: true,
-                  },
-                ],
-              },
-            ],
-          },
-        },
-        {
-          type: 'image',
-          options: { hotspot: true },
-          fields: [
-            {
-              name: 'alt',
-              type: 'string',
-              title: '🖼️ Texto Alternativo (ALT TEXT)',
-              description: 'Obligatorio para SEO',
-              validation: (R) => R.required(),
-            },
-            {
-              name: 'caption',
-              type: 'string',
-              title: 'Leyenda / Pie de foto',
-            },
-          ],
-        },
-      ],
-      validation: (R) => R.required(),
     },
 
     // ─── PESTAÑA: SEO ─────────────────────────────────────────────────────────
     {
       name: 'seoTitle',
       title: 'Título SEO',
-      type: 'string',
+      type: 'localeString',
       group: 'seo',
       description: 'El título que verá Google (diferente al título del artículo si quieres). Máximo 60 caracteres.',
-      validation: (R) =>
-        R.max(60).warning('Google corta los títulos que superan 60 caracteres.'),
     },
     {
       name: 'seoDescription',
       title: 'Meta-Descripción',
-      type: 'text',
-      rows: 3,
+      type: 'localeText',
       group: 'seo',
       description: 'Resumen que aparece debajo del título en Google. Entre 140 y 160 caracteres es lo óptimo.',
-      validation: (R) =>
-        R.min(120)
-          .max(160)
-          .warning('La meta-descripción ideal tiene entre 120 y 160 caracteres.'),
     },
     {
       name: 'focusKeyword',
       title: '🎯 Focus Keyword (Palabra clave principal)',
-      type: 'string',
+      type: 'localeString',
       group: 'seo',
       description: 'La palabra o frase por la que quieres posicionarte. Ej: "marketing inmobiliario lujo Costa Brava"',
     },
@@ -176,7 +107,7 @@ export const postSchema = {
       fields: [
         {
           name: 'alt',
-          type: 'string',
+          type: 'localeString',
           title: 'ALT TEXT de la imagen OG',
         },
       ],
@@ -198,7 +129,7 @@ export const postSchema = {
       group: 'settings',
       description: 'La dirección web del artículo. Ej: "marketing-inmobiliario-lujo-costa-brava"',
       options: {
-        source: 'title',
+        source: 'title.es',
         maxLength: 96,
       },
       validation: (R) => R.required(),
@@ -244,7 +175,7 @@ export const postSchema = {
   // Vista previa en el panel de Sanity
   preview: {
     select: {
-      title: 'title',
+      title: 'title.es',
       author: 'author.name',
       media: 'mainImage',
       featured: 'featured',
