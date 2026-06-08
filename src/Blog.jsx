@@ -491,6 +491,23 @@ export const BlogPostPage = ({ slug, onNavigate }) => {
     setTimeout(() => setCopied(false), 2000)
   }
 
+  useEffect(() => {
+    if (seoTitle) {
+      document.title = `${seoTitle} · Ruka Agency`
+    }
+    if (seoDesc) {
+      const metaDescription = document.querySelector('meta[name="description"]')
+      if (metaDescription) {
+        metaDescription.setAttribute('content', seoDesc)
+      } else {
+        const meta = document.createElement('meta')
+        meta.name = 'description'
+        meta.content = seoDesc
+        document.head.appendChild(meta)
+      }
+    }
+  }, [seoTitle, seoDesc])
+
   return (
     <>
       <Helmet>
